@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+    Polypus: a Big Data Self-Deployable Architecture for Microblogging
+    Text Extraction and Real-Time Sentiment Analysis
+
+    Copyright (C) 2017 Rodrigo Martínez (brunneis) <dev@brunneis.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html data-ng-app="polypus" data-ng-controller="MainController" lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Polypus</title>
+	<meta name="author" content="Rodrigo Martínez">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link type="text/css" rel="stylesheet" href="css/angular-chart.css">
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="css/graph.css" media="screen,projection">
+	<base href="/">
+<head>
+
+
+<body class="blue-grey darken-4">
+
+	<!-- AngularJS and external dependences -->
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
+	<script type="text/javascript" src="js/angular-chart.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <!-- Materialize init hack -->
+    <script>
+        (function($){
+            $(function(){
+                $('.button-collapse').sideNav();
+            });
+        })(jQuery);
+    </script>
+
+	<!-- AngularJS main module -->
+	<script type="text/javascript" src="app/modules/app.js"></script>
+
+	<!-- AngularJS services -->
+	<script type="text/javascript" src="app/services/MetaService.js"></script>
+	<script type="text/javascript" src="app/services/RealtimeService.js"></script>
+	<script type="text/javascript" src="app/services/ExploreService.js"></script>
+	<script type="text/javascript" src="app/services/SearchService.js"></script>
+	<script type="text/javascript" src="app/services/ManageService.js"></script>
+
+	<!-- AngularJS controllers -->
+	<script type="text/javascript" src="app/controllers/MainController.js"></script>
+	<script type="text/javascript" src="app/controllers/RealtimeController.js"></script>
+	<script type="text/javascript" src="app/controllers/ExploreController.js"></script>
+	<script type="text/javascript" src="app/controllers/SearchController.js"></script>
+	<script type="text/javascript" src="app/controllers/ManageController.js"></script>
+
+    <!-- Background Graph -->
+    <script type="text/javascript" src="js/graph.js"></script>
+
+	<nav>
+		<div class="nav-wrapper light-blue accent-4">
+            <a href="realtime" style="margin-left: 10px" class="center brand-logo"><img src="images/logo.svg" alt="Polypus logo" height="55"></a>
+            <a href="#" data-activates="nav-mobile" class="white-text button-collapse"><i class="material-icons">menu</i></a>
+
+            <!-- Main navigation -->
+            <ul class="left hide-on-med-and-down">
+				<li ng-class="{active: activetab=='/realtime'}" class="waves-effect waves-dark">
+					<a href="realtime">
+						<span class="white-text">Real time<i class="material-icons right">trending_up</i></span>
+					</a>
+				</li>
+			</ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li ng-class="{active: activetab=='/manage'}" class="waves-effect waves-dark">
+                    <a href="manage">
+                        <span class="white-text">Manage APL<i class="material-icons right">settings</i></span>
+                    </a>
+                </li>
+                <li ng-class="{active: activetab=='/explore'}" class="waves-effect waves-dark">
+                    <a href="explore">
+                        <span class="white-text">Explore<i class="material-icons right">explore</i></span>
+                    </a>
+                </li>
+                <li ng-class="{active: activetab=='/search'}" class="waves-effect waves-dark">
+                    <a href="search">
+                        <span class="white-text">Search<i class="material-icons right">search</i></span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Small devices side navigation -->
+            <ul class="blue-grey darken-4 side-nav" id="nav-mobile">
+				<li ng-class="{active: activetab=='/realtime'}">
+					<a class="waves-effect waves-light white-text" href="realtime">Real time</a>
+				</li>
+				<li ng-class="{active: activetab=='/explore'}">
+					<a class="waves-effect waves-light white-text" href="explore">Explore</a>
+				</li>
+				<li ng-class="{active: activetab=='/search'}">
+					<a class="waves-effect waves-light white-text" href="search">Search</a>
+                </li>
+				<li ng-class="{active: activetab=='/manage'}">
+					<a class="waves-effect waves-light white-text" href="manage">Manage APL</a>
+                </li>
+			</ul>
+
+		</div>
+	</nav>
+
+	<main>
+        <canvas id="spiders" class="hide-on-med-and-down"></canvas>
+		<br><div ng-view=""></div>
+	</main>
+
+	<footer class="page-footer blue-grey darken-4">
+		<div class="footer-copyright">
+			<div class="container">
+			 Copyright © 2017 Rodrigo Martínez. Some rights reserved.
+			<span class="grey-text text-lighten-4 right">API version {{version}}</span>
+			</div>
+		</div>
+	</footer>
+
+  </body>
+</html>

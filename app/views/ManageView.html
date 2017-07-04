@@ -1,0 +1,42 @@
+<div class="row">
+
+	<div class="col s12 l8 offset-l2">
+		<div class="card-panel blue-grey darken-3">
+				<blockquote class="white-text">
+                    You can add or delete keywords of the APL (Automated
+                    Processing List) directly through this view.<br> The items
+                    available will be processed automatically.
+				</blockquote>
+		</div>
+
+		<div class="card-panel blue-grey darken-3">
+			<div class="row center-align">
+				<div ng-click="remove(term)" ng-repeat="term in lpa" style="margin: 10px" class="chip">{{term}}<i class="material-icons">close</i></div>
+			</div>
+		</div>
+
+		<form ng-submit="submit()">
+
+			<div class="card-panel blue-grey darken-3">
+				<div class="row">
+					<form class="col s12">
+						<div class="row">
+
+							<div class="input-field col s12 m6 l5">
+								<input ng-model="term" placeholder="Add keyword..." id="term" type="text" class="validate">
+							</div>
+
+						</div>
+
+						<div class="row">
+						<button style="margin-left: 10px" class="blue btn waves-effect waves-light" ng-click="add(term)">Add keyword
+						<i class="material-icons right">send</i>
+						</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
