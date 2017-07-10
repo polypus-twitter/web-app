@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+.card-panel {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -25,9 +29,10 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+.parallax-container .section {
+  width: 100%;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {

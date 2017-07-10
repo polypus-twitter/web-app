@@ -33,7 +33,7 @@ app.controller('ManageController', function ($scope, $filter, $interval, ManageS
 		.success(function (){
 			var index = $scope.lpa.indexOf(item);
 			$scope.lpa.splice(index, 1);
-			Materialize.toast('Término eliminado', 4000);					
+			Materialize.toast('Keyword deleted', 4000);					
 		});
 	}
 	
@@ -42,11 +42,11 @@ app.controller('ManageController', function ($scope, $filter, $interval, ManageS
 		ManageService.addTerm(item)
 		.success(function (){
 			if ($scope.lpa.indexOf(item) > -1){
-				Materialize.toast('Término ya existente en la LPA', 4000);
+				Materialize.toast('The keyword already exists', 4000);
 			} else {
 				$scope.lpa.push(item);
 				$scope.lpa.sort();
-				Materialize.toast('Término añadido', 4000);
+				Materialize.toast('Keyword added', 4000);
 			}
 			$scope.term = "";
 		});
