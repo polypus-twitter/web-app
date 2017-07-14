@@ -20,7 +20,7 @@
 
 var app = angular.module("polypus", ['ngRoute', 'chart.js']);
 
-app.constant('urlBase', 'http://localhost:8787/api/1.0');
+app.constant('urlBase', 'http://localhost:8080/api/1.0');
 
 app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 	

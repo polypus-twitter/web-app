@@ -25,9 +25,9 @@ app.controller('SearchController', function ($scope, $filter, $interval, SearchS
 	$scope.processed = false
 
 	var today = new Date();
-	var yesterday = today - new Date(86400000);
+	var six_hour_ago = today - new Date(21600000);
 	
-	$scope.start = $filter('date')(yesterday,'dd-MM-yyyy HH:mm:ss');
+	$scope.start = $filter('date')(six_hour_ago,'dd-MM-yyyy HH:mm:ss');
 	$scope.stop = $filter('date')(today,'dd-MM-yyyy HH:mm:ss');
 	
 	$scope.form = {
@@ -78,6 +78,10 @@ app.controller('SearchController', function ($scope, $filter, $interval, SearchS
 			
 			result = angular.fromJson(data);
 			
+            var total = result.global;
+            $scope.total_polarity = total['polarity'];
+            $scope.total_posts = total['matches'];
+			
 			/* LOS OBJETOS NO ESTÁN ORDENADOS */
 			var windows = result.windows;
 			var keys = Object.keys(result.windows);
@@ -99,8 +103,9 @@ app.controller('SearchController', function ($scope, $filter, $interval, SearchS
 			$scope.data = []
 			$scope.data.push(auxSentiment)
 			$scope.data.push(auxRelevance)
-			
-			$scope.series = ['Avg. polarity', 'No. of posts'];
+
+
+		$scope.series = ['Avg. polarity', 'No. of posts'];
 			
 			$scope.onClick = function (points, evt) {
 				console.log(points, evt);
@@ -122,13 +127,14 @@ app.controller('SearchController', function ($scope, $filter, $interval, SearchS
 							id: 'y-axis-1',
 							type: 'linear',
 							display: true,
-							position: 'right'
+							position: 'left',
+							ticks: {min: 0, max: 1}
 						},
 						{
 							id: 'y-axis-2',
 							type: 'linear',
 							display: true,
-							position: 'left'
+							position: 'right'
 						}
 					]
 				}

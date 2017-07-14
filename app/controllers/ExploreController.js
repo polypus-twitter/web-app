@@ -97,6 +97,10 @@ app.controller('ExploreController', function ($scope, $filter, $interval, Explor
 		
 		result = angular.fromJson(data);
 		
+        var total = result.total;
+        $scope.total_polarity = total[0];
+        $scope.total_posts = total[1];
+		
 		/* LOS OBJETOS NO ESTÁN ORDENADOS */
 		var blocks = result.blocks;
 		var keys = Object.keys(result.blocks);
@@ -115,8 +119,9 @@ app.controller('ExploreController', function ($scope, $filter, $interval, Explor
 		$scope.data = []
 		$scope.data.push(auxSentiment)
 		$scope.data.push(auxRelevance)
-		
-		$scope.series = ['Polarity', 'Posts'];
+
+
+		$scope.series = ['Avg. polarity', 'No. of posts'];
 		
 		$scope.onClick = function (points, evt) {
 			console.log(points, evt);
@@ -138,13 +143,14 @@ app.controller('ExploreController', function ($scope, $filter, $interval, Explor
 						id: 'y-axis-1',
 						type: 'linear',
 						display: true,
-						position: 'right'
+						position: 'left',
+						ticks: {min: 0, max: 1}
 					},
 					{
 						id: 'y-axis-2',
 						type: 'linear',
 						display: true,
-						position: 'left'
+						position: 'right'
 					}
 				]
 			}
